@@ -47,21 +47,22 @@
                         <td>{{ count($category->jops) }}</td>
                         <td>{{ $category->created_at->diffforhumans() }}</td>
                         <td>{{ $category->updated_at->diffforhumans() }}</td>
-
-
                         <td>
-                            <button type="submit" class="btn btn-outline-success btn-sm">
-                                <a href="{{ route('categories.edit', $category->slug) }}"
-                                    style="color: rgb(170, 170, 170)">Edit </a></button>
-
+                            @if (Auth::user() == $category->user)
+                                <button type="submit" class="btn btn-outline-success btn-sm">
+                                    <a href="{{ route('categories.edit', $category->slug) }}"
+                                        style="color: rgb(170, 170, 170)">Edit </a></button>
+                            @endif
                         </td>
                         <td>
-                            <form action="{{ route('categories.destroy', $category->slug) }}" method="POST"
-                                class="delete-form">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-outline-danger btn-sm">Delete </button>
-                            </form>
+                            @if (Auth::user() == $category->user)
+                                <form action="{{ route('categories.destroy', $category->slug) }}" method="POST"
+                                    class="delete-form">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">Delete </button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

@@ -13,7 +13,15 @@ class UserController extends Controller
     public function show($name)
     {
         $user = User::where('name', $name)->first();
-        return view('dashboard.users.user_profile', compact('user'));
+        $currentUser = Auth::user();
+        if ($currentUser->role == 'user' && $user->role == 'admin') {
+            return redirect()->back()->with('success', 'You are not authorized to view this page');
+        } else {
+            return
+                view('dashboard.users.user_profile', compact('user'));
+        }
+        // return view('dashboard.users.user_profile', compact('user'));
+
     }
     public function edit($name)
     {
@@ -21,7 +29,7 @@ class UserController extends Controller
         return view('dashboard.users.edit', compact('user'));
     }
 
-    public function update(Request $request, $name)
+    public function update(Request $request)
     {
         $user = User::where('name', Auth::user()->name)->first();
         //delete old image

@@ -32,12 +32,15 @@ Route::group(
         Route::get('/company/{slug}', [HomeController::class, 'company'])->name('company');
         Route::get('/category/{slug}', [HomeController::class, 'category'])->name('category');
         Route::get('/jop/{slug}', [HomeController::class, 'jop'])->name('jop');
-        Route::post('/comment/{id}', [CommentController::class, 'store'])->name('comment.store');
-        Route::delete('/comment/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
-        Route::get('/post_job', [HomeController::class, 'post_job'])->name('post_job');
-        Route::post('/post_job', [HomeController::class, 'create_post_jop'])->name('create.post_job');
         Route::get('/search', [HomeController::class, 'search'])->name('search');
+
         Route::middleware('auth')->group(function () {
+            //  Front page comment and delete it
+            Route::post('/comment/{id}', [CommentController::class, 'store'])->name('comment.store');
+            Route::delete('/comment/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
+            // Front page post job
+            Route::get('/post_job', [HomeController::class, 'post_job'])->name('post_job');
+            Route::post('/post_job', [HomeController::class, 'create_post_jop'])->name('create.post_job');
             // notifications Route
             Route::get('user/{name}/notifications', [NotificationController::class, 'notify_as_read'])->name('notifications');
             Route::get('user/notifications', [NotificationController::class, 'Allnotifications'])->name('All.notifications');

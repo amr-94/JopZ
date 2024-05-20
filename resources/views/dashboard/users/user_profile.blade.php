@@ -33,15 +33,18 @@
                         @endif
                     </ul>
                 </div>
-                <div class="card-footer">
-                    <div class="d-flex justify-content-between">
-                        <a href="{{ route('users.edit', $user->name) }}" class="btn btn-primary">Edit</a>
-                        <form action="{{ route('logout') }}" method="post">
-                            @csrf
-                            <button type="submit" class="btn btn-danger">Logout</button>
-                        </form>
+                @if (Auth::user() == $user)
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ route('users.edit', $user->name) }}" class="btn btn-primary">Edit</a>
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Logout</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                @endif
+
             </div>
         </div>
     </div>

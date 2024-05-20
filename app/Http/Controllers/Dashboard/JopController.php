@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\Jop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class JopController extends Controller
@@ -116,12 +117,12 @@ class JopController extends Controller
 
     public function trash()
     {
-        $jops = Jop::onlyTrashed()->paginate(5);
+        $jops = Auth::user()->jops()->onlyTrashed()->paginate(5);
         return view('dashboard.jops.trash', compact('jops'));
     }
     public function forcedestroy($slug)
     {
-        $jop = Jop::where('slug', $slug)->onlyTrashed()->first();
+        $jop = Auth::user()->jops()->where('slug', $slug)->onlyTrashed()->first();
         if ($jop->image !== null) {
             File::delete(public_path('files/jops/' . $jop->image));
         }
@@ -130,7 +131,7 @@ class JopController extends Controller
     }
     public function restore($slug)
     {
-        $jop = Jop::where('slug', $slug)->onlyTrashed()->first();
+        $jop = Auth::user()->jops()->where('slug', $slug)->onlyTrashed()->first();
         $jop->restore();
         return redirect()->route('jops.trash')->with('success', 'Jop Restored Successfully');
     }

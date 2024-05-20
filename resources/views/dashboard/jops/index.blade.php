@@ -6,7 +6,7 @@
     <button class="btn btn-dark mb-3"><a href="{{ route('jops.create') }}">Add Jop</a></button>
     <button class="btn btn-dark mb-3"><a href="{{ route('jops.trash') }}">Trash</a></button>
     <div class="row row-cols-1 row-cols-md-3 g-3">
-        @foreach ($jops as $jop)
+        @foreach (Auth::user()->jops as $jop)
             <div class="col">
                 <div class="card">
                     <img src="{{ asset('files/jops/' . $jop->image) }}" class="card-img-top" alt="..."
@@ -32,14 +32,16 @@
                     </div>
                     <div class="card-footer">
                         <p class="card-text mb-5">{{ $jop->created_at->diffForHumans() }}</p>
-                        <div class="d-flex justify-content-between">
-                            <a href="{{ route('jops.edit', $jop->slug) }}" class="btn btn-primary">Edit</a>
-                            <form action="{{ route('jops.destroy', $jop->slug) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </div>
+                        @if (Auth::user() == $jop->user)
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ route('jops.edit', $jop->slug) }}" class="btn btn-primary">Edit</a>
+                                <form action="{{ route('jops.destroy', $jop->slug) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

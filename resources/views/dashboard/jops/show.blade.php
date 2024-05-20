@@ -37,14 +37,16 @@
                     </div>
                     <div class="card-footer">
                         <p class="card-text mb-5">{{ $jop->created_at->diffForHumans() }}</p>
-                        <div class="d-flex justify-content-between">
-                            <a href="{{ route('jops.edit', $jop->slug) }}" class="btn btn-primary">Edit</a>
-                            <form action="{{ route('jops.destroy', $jop->slug) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </div>
+                        @if (Auth::user() == $jop->user)
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ route('jops.edit', $jop->slug) }}" class="btn btn-primary">Edit</a>
+                                <form action="{{ route('jops.destroy', $jop->slug) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
