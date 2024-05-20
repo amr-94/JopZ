@@ -191,6 +191,14 @@
                         <div class="info">
                             <a href="{{ route('users.show', Auth::user()->name) }}"
                                 class="d-block">{{ Auth::user()->name }}</a>
+                            <div class="d-flex justify-content-between mt-2">
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-outline-danger ">logout</button>
+                                </form>
+                                <a href="{{ route('users.edit', Auth::user()->name) }}"
+                                    class="btn btn-outline-success ml-2 ">edit page</a>
+                            </div>
                         </div>
 
                     </div>
