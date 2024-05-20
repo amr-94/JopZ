@@ -33,8 +33,9 @@ class HomeController extends Controller
     public function category($slug)
     {
         $category = Category::where('slug', $slug)->first();
-
-        return view('Front.allcategory', compact('category'));
+        $categories = Category::all();
+        $companies = Company::all();
+        return view('Front.allcategory', compact('category', 'categories', 'companies'));
     }
 
     public function post_job()
