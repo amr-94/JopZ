@@ -164,6 +164,11 @@
                     <input class="search-box_search_input" placeholder="Search Keyword" type="text"
                         name="name">
                     <select class="dropdown_item_select search-box_search_input" name="category">
+                        {{-- @php
+                            $categories = App\Models\Category::all();
+                            $companies = App\Models\Company::all();
+
+                        @endphp --}}
                         <option value="">Select Category</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>

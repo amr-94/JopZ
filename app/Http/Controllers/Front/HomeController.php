@@ -19,8 +19,11 @@ class HomeController extends Controller
     }
     public function jop($slug)
     {
+        $categories = Category::all();
+        $companies = company::all();
+
         $jop = Jop::where('slug', $slug)->first();
-        return view('Front.jop', compact('jop'));
+        return view('Front.jop', compact('jop', 'companies', 'categories'));
     }
     public function company($slug)
     {
