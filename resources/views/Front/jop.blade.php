@@ -25,7 +25,7 @@
                 <i class="material-icons">place</i>
                 <span class="text">Location : {{ $jop->company->address }}</span>
                 <h4>Short description</h4>
-                <p>{{ $jop->description }}</p>
+                <p>Description : {{ $jop->description }}</p>
                 <p>Status : {{ $jop->status }}</p>
             </div>
             <img src="imags/job-detail.jpg" alt class="job-detail-img">
