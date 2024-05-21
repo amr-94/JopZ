@@ -6,10 +6,15 @@
             <div class="carousel-container">
                 <div class="carousel-content">
                     <h2 class="font-color-white">Job Result</h2>
-                    <p class="font-color-white width-100"><a href="{{ route('home') }}" class="font-color-white">Home
-                            /</a><a href="{{ route('category', $jop->category->slug) }}" class="font-color-white">
-                            {{ $jop->category->name }} </a>/ {{ $jop->name }}
-                    </p>
+                    @if ($jop->category)
+                        <p class="font-color-white width-100"><a href="{{ route('home') }}" class="font-color-white">Home
+                                /</a><a href="{{ route('category', $jop->category->slug) }}" class="font-color-white">
+                                {{ $jop->category->name }} </a>/ {{ $jop->name }}
+                        </p>
+                    @else
+                        <p>no category for this jop</p>
+                    @endif
+
                 </div>
             </div>
         </div>
@@ -20,10 +25,14 @@
             <div class="Exclusive-Product">
                 <h3>{{ $jop->name }}</h3>
                 <a href="#" class="Apply-Now">Apply Now</a>
-                <h6 class="font-color-orange">Company : {{ $jop->company->name }}</h6>
+                @if ($jop->company)
+                    <h6 class="font-color-orange">Company : {{ $jop->company->name }}</h6>
+                    <i class="material-icons">place</i>
+                    <span class="text">Location : {{ $jop->company->address }}</span>
+                @else
+                    <p>no company for this job</p>
+                @endif
                 <h6 class="font-color-orange">Type : {{ $jop->type }}</h6>
-                <i class="material-icons">place</i>
-                <span class="text">Location : {{ $jop->company->address }}</span>
                 <h4>Short description</h4>
                 <p>Description : {{ $jop->description }}</p>
                 <p>Status : {{ $jop->status }}</p>
@@ -98,49 +107,55 @@
         <div class="container">
             <div class="max-width-80">
                 <h4>Comments</h4>
-                @foreach ($jop->comments as $comment)
-                    <div class="media border p-3">
-                        <img src="{{ asset('files/profile/images/' . $comment->from_user->image) }}" alt="John Doe"
-                            class="mr-3 rounded-circle imagess" style="width:60px;">
-                        <div class="media-body">
-                            <h6>{{ $comment->from_user->name }}</h6>
-                            <p>{{ $comment->comment }}</p>
-                            <a href="{{ asset('files/comment/' . $comment->file) }}">{{ $comment->file }}</a>
+                @if (count($jop->comments) > 0)
+                    @foreach ($jop->comments as $comment)
+                        <div class="media border p-3">
+                            <img src="{{ asset('files/profile/images/' . $comment->from_user->image) }}" alt="John Doe"
+                                class="mr-3 rounded-circle imagess" style="width:60px;">
+                            <div class="media-body">
+                                <h6>{{ $comment->from_user->name }}</h6>
+                                <p>{{ $comment->comment }}</p>
+                                <a href="{{ asset('files/comment/' . $comment->file) }}">{{ $comment->file }}</a>
+                            </div>
+                            @if (Auth::check() && $comment->from_user_id == Auth::id())
+                                <form action="{{ route('comment.destroy', $comment->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-outline-danger">Delete</button>
+                                </form>
+                            @endif
                         </div>
-                        @if (Auth::check() && $comment->from_user_id == Auth::id())
-                            <form action="{{ route('comment.destroy', $comment->id) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button class="btn btn-outline-danger">Delete</button>
-                            </form>
-                        @endif
-                    </div>
-                @endforeach
-                @if (Auth::user() == $jop->user)
-                    <div class="media border p-3 padding-none border-none">
-                        <img src="{{ asset('files/profile/images/' . $jop->user->image) }}" alt="John Doe"
-                            class="mr-3 rounded-circle imagess" style="width:60px;">
-                        <div class="media-body">
-                            <form action="{{ route('comment.store', $jop->slug) }}" method="post">
-                                @csrf
-                                <input type="hidden" name="jop_id" value="{{ $jop->id }}">
+                    @endforeach
+                @else
+                    <p>No comments Yet</p>
+                @endif
+                <div class="media border p-3 padding-none border-none">
+                    <img src="{{ asset('files/profile/images/' . $jop->user->image) }}" alt="John Doe"
+                        class="mr-3 rounded-circle imagess" style="width:60px;">
+                    <div class="media-body">
+                        <form action="{{ route('comment.store', $jop->slug) }}" method="post">
+                            @csrf
+                            <input type="hidden" name="jop_id" value="{{ $jop->id }}">
+                            @if (Auth::check())
                                 <input type="hidden" name="from_user_id" value="{{ Auth::id() }}">
-                                <input type="hidden" name="to_user_id" value="{{ $jop->user->id }}">
-                                <input type="text" name="title" id="title" placeholder="Title" name="title">
-                                <textarea name="comment" id="comment" placeholder="Type commeny" required name="comment"></textarea>
-                                <input type="file" name="file" id="comment_file" placeholder="Title" name="title">
+                            @endif
+                            <input type="hidden" name="to_user_id" value="{{ $jop->user->id }}">
+                            <input type="text" name="title" id="title" placeholder="Title" name="title">
+                            <textarea name="comment" id="comment" placeholder="Type commeny" required name="comment"></textarea>
+                            <input type="file" name="file" id="comment_file" placeholder="Title" name="title">
 
-                                @if (Auth::check())
-                                    <button class="Post">Post</button>
-                                @else
-                                    <a href="{{ login }}"> Login to Comment</a>
-                                @endif
+                            @if (Auth::check())
+                                <button class="Post">Post</button>
+                            @else
+                                <a href="{{ login }}"> Login to Comment</a>
+                            @endif
 
-                            </form>
-                        </div>
+                        </form>
                     </div>
+                </div>
+
+
             </div>
-            @endif
         </div>
     </section>
 @endsection

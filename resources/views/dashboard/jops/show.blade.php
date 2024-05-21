@@ -15,14 +15,21 @@
                             Description :
                         </p>{{ $jop->description }}</p>
                         <p class="card-text">
-                        <p class="fw-bold" style="color: rgb(134, 132, 132);font-weight: bold;">Jop
-                            Category :
-                        </p><a href="{{ route('categories.show', $jop->category->slug) }}">{{ $jop->category->name }}</a>
+
+                            @if ($jop->category)
+                                <a
+                                    href="{{ route('categories.show', $jop->category->slug) }}">{{ $jop->category->name }}</a>
+                            @else
+                                No Category
+                            @endif
                         </p>
-                        <p class="card-text">
-                        <p class="fw-bold" style="color: rgb(134, 132, 132);font-weight: bold;">jop
-                            copmany :
-                        </p><a href="{{ route('companies.show', $jop->company->slug) }}">{{ $jop->company->name }}</a></p>
+                        <p class="card-text"> Company :
+                            @if ($jop->company)
+                                <a href="{{ route('companies.show', $jop->company->slug) }}">{{ $jop->company->name }}</a>
+                            @else
+                                No Company
+                            @endif
+                        </p>
                         <p class="card-text">
                         <p class="fw-bold" style="color: rgb(134, 132, 132);font-weight: bold;">jop
                             TAGS :
@@ -36,7 +43,10 @@
                         </p>{{ $jop->user->name }}</p>
                     </div>
                     <div class="card-footer">
-                        <p class="card-text mb-5">{{ $jop->created_at->diffForHumans() }}</p>
+                        <div class="d-flex justify-content-between">
+                            <p class="card-text mb-5">creted since : {{ $jop->created_at->diffForHumans() }}</p>
+                            <p class="card-text mb-5">last updated since : {{ $jop->updated_at->diffForHumans() }}</p>
+                        </div>
                         @if (Auth::user() == $jop->user)
                             <div class="d-flex justify-content-between">
                                 <a href="{{ route('jops.edit', $jop->slug) }}" class="btn btn-primary">Edit</a>

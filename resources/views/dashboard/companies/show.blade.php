@@ -30,7 +30,7 @@
                 </div>
                 <div class="card-footer">
                     <p class="card-text mb-5">{{ $company->created_at->diffForHumans() }}</p>
-                    @if (Auth::user() == $company->user)
+                    @if (Auth::user()->id == $company->user_id)
                         <div class="d-flex justify-content-between">
                             <a href="{{ route('companies.edit', $company->slug) }}" class="btn btn-primary">Edit</a>
                             <form action="{{ route('companies.destroy', $company->slug) }}" method="post">
@@ -58,8 +58,19 @@
                         <p class="card-text">{{ $jop->description }}</p>
                         <p class="card-text"> Type : {{ $jop->type }}</p>
                         <p class="card-text"> Status : {{ $jop->status }}</p>
-                        <p class="card-text"> Category : {{ $jop->category->name }}</p>
-                        <p class="card-text"> Company : {{ $jop->company->name }}</p>
+                        @if ($jop->category)
+                            <a href="{{ route('categories.show', $jop->category->slug) }}">{{ $jop->category->name }}</a>
+                        @else
+                            No Category
+                        @endif
+                        </p>
+                        <p class="card-text"> Company :
+                            @if ($jop->company)
+                                <a href="{{ route('companies.show', $jop->company->slug) }}">{{ $jop->company->name }}</a>
+                            @else
+                                No Company
+                            @endif
+                        </p>
                         <p class="card-text"> uploded by : {{ $jop->user->name }}</p>
                         @php
                             $tags = explode(',', $jop->tags);
@@ -69,8 +80,11 @@
                         @endforeach
                     </div>
                     <div class="card-footer">
-                        <p class="card-text mb-5">{{ $jop->created_at->diffForHumans() }}</p>
-                        @if (Auth::user() == $jop->user)
+                        <div class="d-flex justify-content-between">
+                            <p class="card-text mb-5">creted since : {{ $jop->created_at->diffForHumans() }}</p>
+                            <p class="card-text mb-5">last updated since :{{ $jop->updated_at->diffForHumans() }}</p>
+                        </div>
+                        @if (Auth::user()->id == $jop->user_id)
                             <div class="d-flex justify-content-between">
                                 <a href="{{ route('jops.edit', $jop->slug) }}" class="btn btn-primary">Edit</a>
                                 <form action="{{ route('jops.destroy', $jop->slug) }}" method="post">

@@ -12,7 +12,6 @@
                     <th>ID</th>
                     <th>image</th>
                     <th>Name</th>
-                    <th>Category</th>
                     <th>Status</th>
                     <th>Company</th>
                     <th>Created_at</th>
@@ -33,11 +32,6 @@
                             </a>
                         </td>
                         <td>{{ $jop->name }}</td>
-                        <td>
-                            <a href="{{ route('categories.show', $jop->category->slug) }}"
-                                style="color: rgb(170, 170, 170)">
-                                {{ $jop->category->name }}</a>
-                        </td>
                         <td>{{ $jop->status }}</td>
                         <td>{{ $jop->company->name }}</td>
                         <td>{{ $jop->created_at->diffforhumans() }}</td>

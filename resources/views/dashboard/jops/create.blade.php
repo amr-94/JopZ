@@ -32,7 +32,7 @@
             <div class="mb-3">
                 <label for="type" class="form-label">Type of this jop</label>
                 <select class="form-select" aria-label="Default select example" name="type">
-                    <option selected value="">Select Type</option>
+                    <option selected>Select Type</option>
                     <option value="full-time">Full Time</option>
                     <option value="part-time">Part Time</option>
                     <option value="remotly">Remotly</option>
@@ -42,7 +42,7 @@
             <div class="mb-3">
                 <label for="category_id" class="form-label">Category</label>
                 <select class="form-select" aria-label="Default select example" name="category_id">
-                    <option selected value="0">Select Category</option>
+                    <option value="">Select Category</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
@@ -51,7 +51,7 @@
             <div class="mb-3">
                 <label for="company_id" class="form-label">Company</label>
                 <select class="form-select" aria-label="Default select example" name="company_id">
-                    <option selected value="">Select Company</option>
+                    <option value="">Select Company</option>
                     @foreach ($companies as $company)
                         <option value="{{ $company->id }}">{{ $company->name }}</option>
                     @endforeach

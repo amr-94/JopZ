@@ -39,8 +39,8 @@ class JopController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'category_id' => 'exists:categories,id',
-            'company_id' => 'exists:companies,id',
+            // 'category_id' => 'exists:categories,id',
+            // 'company_id' => 'exists:companies,id',
             'status' => ['required', 'in:active,inactive'],
             'type' => ['required', 'in:full-time,part-time,remotly,internship'],
             'jop_image' => ['image', 'mimes:jpeg,png,jpg,gif,svg'],
@@ -90,8 +90,8 @@ class JopController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'category_id' => 'required',
-            'company_id' => 'required',
+            // 'category_id' => 'required',
+            // 'company_id' => 'required',
         ]);
         if ($request->hasFile('jop_image')) {
             $filename = time() . '.' . $request->jop_image->extension();

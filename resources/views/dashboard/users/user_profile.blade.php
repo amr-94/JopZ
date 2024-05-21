@@ -33,7 +33,7 @@
                         @endif
                     </ul>
                 </div>
-                @if (Auth::user() == $user)
+                @if (Auth::user()->id == $user->id)
                     <div class="card-footer">
                         <div class="d-flex justify-content-between">
                             <a href="{{ route('users.edit', $user->name) }}" class="btn btn-primary">Edit</a>
@@ -62,9 +62,16 @@
                         <p class="card-text">{{ $jop->description }}</p>
                         <p class="card-text"> Type : {{ $jop->type }}</p>
                         <p class="card-text"> Status : {{ $jop->status }}</p>
-                        <p class="card-text"> Category : {{ $jop->category->name }}</p>
-                        <p class="card-text"> Company : {{ $jop->company->name }}</p>
-                        <p class="card-text"> uploded by : {{ $jop->user->name }}</p>
+                        @if ($jop->category)
+                            <p class="card-text"> Category : {{ $jop->category->name }}</p>
+                        @else
+                            No Category
+                        @endif
+                        @if ($jop->company)
+                            <p class="card-text"> Company : {{ $jop->company->name }}</p>
+                        @else
+                            <p> no company </p>
+                        @endif
                         @php
                             $tags = explode(',', $jop->tags);
                         @endphp
@@ -73,15 +80,20 @@
                         @endforeach
                     </div>
                     <div class="card-footer">
-                        <p class="card-text mb-5">{{ $jop->created_at->diffForHumans() }}</p>
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('jops.edit', $jop->slug) }}" class="btn btn-primary">Edit</a>
-                            <form action="{{ route('jops.destroy', $jop->slug) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
+                            <p class="card-text mb-5">creted since : {{ $jop->created_at->diffForHumans() }}</p>
+                            <p class="card-text mb-5">last updated since :{{ $jop->updated_at->diffForHumans() }}</p>
                         </div>
+                        @if (Auth::user()->id == $jop->user_id)
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ route('jops.edit', $jop->slug) }}" class="btn btn-primary">Edit</a>
+                                <form action="{{ route('jops.destroy', $jop->slug) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

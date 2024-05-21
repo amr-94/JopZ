@@ -10,62 +10,62 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>image</th>
                     <th>Name</th>
-                    <th>Slug</th>
                     <th>Description</th>
                     <th>parent_id</th>
-                    <th>Status</th>
                     <th># of Jops</th>
                     <th>Created_at</th>
                     <th>Updated_at</th>
                     <th>Actions</th>
                 </tr>
             </thead>
-
-
             <tbody>
-                @foreach ($categories as $category)
-                    <tr>
-                        <td>{{ $category->id }}</td>
-                        <td>
-                            <a href="{{ route('categories.show', $category->slug) }}">
-                                <img src="{{ asset('files/categories/' . $category->image) }}" alt="{{ $category->name }}"
-                                    class="img-fluid" style="width: 100px">
-                            </a>
-                        </td>
-                        <td><a href="{{ route('categories.show', $category->slug) }}"
-                                style="color: rgb(170, 170, 170)">{{ $category->name }}</a></td>
-                        <td>{{ $category->slug }}</td>
-                        <td>{{ $category->description }}</td>
-                        <td>
-                            <a href="{{ route('categories.show', $category->slug) }}" style="color: rgb(170, 170, 170)">
-                                {{ $category->parent->name ?? 'No Parent' }}</a>
-                        </td>
-                        <td>{{ $category->status }}</td>
-                        <td>{{ count($category->jops) }}</td>
-                        <td>{{ $category->created_at->diffforhumans() }}</td>
-                        <td>{{ $category->updated_at->diffforhumans() }}</td>
-                        <td>
-                            @if (Auth::user() == $category->user)
-                                <button type="submit" class="btn btn-outline-success btn-sm">
-                                    <a href="{{ route('categories.edit', $category->slug) }}"
-                                        style="color: rgb(170, 170, 170)">Edit </a></button>
-                            @endif
-                        </td>
-                        <td>
-                            @if (Auth::user() == $category->user)
-                                <form action="{{ route('categories.destroy', $category->slug) }}" method="POST"
-                                    class="delete-form">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-outline-danger btn-sm">Delete </button>
-                                </form>
-                            @endif
-                        </td>
-                    </tr>
-                @endforeach
+                @if (Auth::user()->categories)
+                    @foreach (Auth::user()->categories as $category)
+                        <tr>
+                            <td>
+                                <a href="{{ route('categories.show', $category->slug) }}">
+                                    <img src="{{ asset('files/categories/' . $category->image) }}"
+                                        alt="{{ $category->name }}" class="img-fluid" style="width: 100px">
+                                </a>
+                            </td>
+                            <td><a href="{{ route('categories.show', $category->slug) }}"
+                                    style="color: rgb(170, 170, 170)">{{ $category->name }}</a></td>
+                            <td>
+                                <p></p>{{ $category->description }}
+                            </td>
+                            <td>
+                                <a href="{{ route('categories.show', $category->slug) }}" style="color: rgb(170, 170, 170)">
+                                    {{ $category->parent->name ?? 'No Parent' }}</a>
+                            </td>
+                            <td>{{ count($category->jops) }}</td>
+                            <td>{{ $category->created_at->diffforhumans() }}</td>
+                            <td>{{ $category->updated_at->diffforhumans() }}</td>
+                            <td>
+                                @if (Auth::user()->id == $category->user_id)
+                                    <button type="submit" class="btn btn-outline-success btn-sm">
+                                        <a href="{{ route('categories.edit', $category->slug) }}"
+                                            style="color: rgb(170, 170, 170)">Edit </a></button>
+                                @endif
+                            </td>
+                            <td>
+                                @if (Auth::user()->id == $category->user_id)
+                                    <form action="{{ route('categories.destroy', $category->slug) }}" method="POST"
+                                        class="delete-form">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">Delete </button>
+                                    </form>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <p> no catrgory for you </p>
+
+                @endif
+
             </tbody>
         </table>
     </div>

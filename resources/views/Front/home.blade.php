@@ -87,10 +87,16 @@
                             <h6> <a href="{{ route('jop', $jop->slug) }}" class="font-color-black">{{ $jop->name }}</a>
                             </h6>
                             <i class="large material-icons">account_balance</i>
-                            <span class="text"><a
-                                    href="{{ route('company', $jop->company->slug) }}">{{ $jop->company->name }}</a></span>
-                            <br />
-                            <span class="text font-size">#{{ $jop->comments->count() }} Comments</span>
+                            @if ($jop->company)
+                                <span class="text">
+                                    <a
+                                        href="{{ route('company', $jop->company->slug) }}">{{ $jop->company->name }}</a></span>
+                                <br />
+                            @else
+                                No Company
+                            @endif
+
+                            <br> <span class="font-size font-bold">#{{ $jop->comments->count() }} Comments</span>
                             <br><span class="text font-size">Status : {{ $jop->status }} </span>
                             <div class="float-right margin-top text-align-center">
                                 <a href="{{ route('jop', $jop->slug) }}" class="part-full-time">{{ $jop->type }}</a>

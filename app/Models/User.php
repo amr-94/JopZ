@@ -62,4 +62,23 @@ class User extends Authenticatable
     {
         return $this->hasMany(Jop::class);
     }
+    /**
+     * Get all of the companies for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function companies(): HasMany
+    {
+        return $this->hasMany(Company::class);
+    }
+
+    /**
+     * Get all of the categories for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function categories(): HasMany
+    {
+        return $this->hasMany(Category::class);
+    }
 }
