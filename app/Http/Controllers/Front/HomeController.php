@@ -28,7 +28,9 @@ class HomeController extends Controller
     public function company($slug)
     {
         $company = Company::where('slug', $slug)->first();
-        return view('Front.company', compact('company'));
+        $categories = Category::all();
+        $companies = company::all();
+        return view('Front.company', compact('company', 'categories', 'companies'));
     }
     public function category($slug)
     {

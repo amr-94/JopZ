@@ -9,7 +9,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>FreeLancer JopZ</title>
+    <title>JopZ</title>
 
     <script src="{{ asset('js/4n2NXumNjtg5LPp6VXLlDicTUfA.js') }}"></script>
     <link rel="apple-touch-icon" href="images/apple-touch-icon.html">
@@ -111,7 +111,7 @@
                 </form>
             </div>
             <nav class="menu_nav">
-                <ul class="menu_mm">
+                {{-- <ul class="menu_mm">
                     <li class="dropdown menu_mm">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Home
                             <span class="caret"></span></a>
@@ -131,7 +131,7 @@
                     <li class="menu_mm"><a href="blog_page.html">Blog</a></li>
                     <li class="menu_mm"><a href="about_us.html">About</a></li>
                     <li class="menu_mm"><a href="contact.html">Contact</a></li>
-                </ul>
+                </ul> --}}
             </nav>
         </div>
     </header>
@@ -164,11 +164,6 @@
                     <input class="search-box_search_input" placeholder="Search Keyword" type="text"
                         name="name">
                     <select class="dropdown_item_select search-box_search_input" name="category">
-                        {{-- @php
-                            $categories = App\Models\Category::all();
-                            $companies = App\Models\Company::all();
-
-                        @endphp --}}
                         <option value="">Select Category</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>

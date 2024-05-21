@@ -133,7 +133,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="owl-carousel Featuread-Company-carousel">
                         @foreach ($companies as $company)
-                            <a href="" class="Featuread-Company-item">
+                            <a href="{{ route('company', $company->slug) }}" class="Featuread-Company-item">
                                 <div class="media text-align-center  media1">
                                     <img src="{{ asset('files/company/' . $company->logo) }}"
                                         style="width: 90%;height: 90%;" alt="{{ $company->name }}"
