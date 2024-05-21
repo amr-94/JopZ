@@ -68,7 +68,7 @@
         </div>
     </section>
 
-
+    {{-- Recent Job Post --}}
     <section id="v2-resent-job-post">
         <div class="vertical-space-85"></div>
         <div class="container text-center">
@@ -116,25 +116,14 @@
 
             <div class="job-list">
                 <ul class="pagination justify-content-end margin-auto">
-                    {{-- <li class="page-item"><a class="page-link pdding-none" href="javascript:void(0);"><i
-                                class=" material-icons keyboard_arrow_left_right">keyboard_arrow_left</i></a></li>
-                    <li class="page-item"><a class="page-link active" href="javascript:void(0);">1</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0);">4</a></li>
-                    <li class="page-item">
-                        <a class="page-link pdding-none" href="javascript:void(0);"> <i
-                                class=" material-icons keyboard_arrow_left_right">keyboard_arrow_right</i></a>
-                    </li> --}}
                     {{ $jops->links() }}
                 </ul>
             </div>
-
         </div>
         <div class="vertical-space-60"></div>
     </section>
 
-
+    {{-- Featuread Company --}}
     <section id="v2-Featuread-Company" class="background-color-white">
         <div class="vertical-space-85"></div>
         <div class="container text-center">
@@ -173,68 +162,4 @@
             <div class="vertical-space-85"></div>
         </div>
     </section>
-
-    {{-- <section id="Trusted-by-Experts">
-        <div class="vertical-space-85"></div>
-        <div class="container">
-            <h3 class="text-center">Trusted by Experts</h3>
-            <div class="vertical-space-30"></div>
-            <p class="max-width">Lorem ipsum tempus amet conubia adipiscing fermentum viverra gravida, mollis
-                suspendisse pretium dictumst inceptos mattis euismod
-            </p>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="owl-carousel Trusted-by-Experts-carousel">
-                    <div class="Trusted-by-Experts-item">
-                        <div class="testimonial">
-                            <div class="pic">
-                                <img src="{{ asset('imags/Clients-Testimonial1.jpg') }}" alt="">
-                            </div>
-                            <h4 class="title">Farhana Istifa</h4>
-                            <blockquote>
-                                <p>
-                                    Ye on properly handsome returned throwing am no whatever. In without wishing he of
-                                    pictureno exposed talking minutes. Curiosity continual belonging offending so
-                                    explained it exquisite. Do remember to followed yourself material mr recurred
-                                    carriage.
-                                </p>
-                            </blockquote>
-                        </div>
-                    </div>
-                    <div class="Trusted-by-Experts-item">
-                        <div class="testimonial">
-                            <div class="pic">
-                                <img src="{{ asset('imags/Clients-Testimonial2.jpg') }}" alt="">
-                            </div>
-                            <h4 class="title">Farhana Islam</h4>
-                            <blockquote>
-                                <p>
-                                    Ye on properly handsome returned throwing am no whatever. In without wishing he of
-                                    pictureno exposed talking minutes. Curiosity continual belonging offending so
-                                    explained it exquisite. Do remember to followed yourself material mr recurred
-                                    carriage.
-                                </p>
-                            </blockquote>
-                        </div>
-                    </div>
-                    <div class="Trusted-by-Experts-item">
-                        <div class="testimonial">
-                            <div class="pic">
-                                <img src="{{ asset('imags/Clients-Testimonial3.jpg') }}" alt="">
-                            </div>
-                            <h4 class="title">Farhana Istifa</h4>
-                            <blockquote>
-                                <p>
-                                    Ye on properly handsome returned throwing am no whatever. In without wishing he of
-                                    pictureno exposed talking minutes. Curiosity continual belonging offending so
-                                    explained it exquisite. Do remember to followed yourself material mr recurred
-                                    carriage.
-                                </p>
-                            </blockquote>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="vertical-space-85"></div>
-        </div>
-    </section> --}}
 @endsection
