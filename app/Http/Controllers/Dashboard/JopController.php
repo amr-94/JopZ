@@ -26,8 +26,8 @@ class JopController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        $companies = Company::all();
+        $categories = Auth::user()->categories()->get();
+        $companies = Auth::user()->companies()->get();
         return view('dashboard.jops.create', compact('categories', 'companies'));
     }
 
@@ -72,8 +72,8 @@ class JopController extends Controller
     public function edit($id)
     {
         $jop = Jop::where('slug', $id)->first();
-        $categories = Category::all();
-        $companies = Company::all();
+        $categories = Auth::user()->categories()->get();
+        $companies = Auth::user()->companies()->get();
         return view('dashboard.jops.edit', compact('jop', 'categories', 'companies'));
     }
 

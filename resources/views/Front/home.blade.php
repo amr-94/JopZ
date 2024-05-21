@@ -98,9 +98,16 @@
 
                             <br> <span class="font-size font-bold">#{{ $jop->comments->count() }} Comments</span>
                             <br><span class="text font-size">Status : {{ $jop->status }} </span>
+                            <p class="date-time">Created Since: {{ $jop->created_at->diffForHumans() }}</p>
+                            @php
+                                $tags = explode(',', $jop->tags);
+                            @endphp
+                            @foreach ($tags as $tag)
+                                <span class="badge bg-primary" style="color: white">{{ $tag }}</span>
+                            @endforeach
                             <div class="float-right margin-top text-align-center">
+
                                 <a href="{{ route('jop', $jop->slug) }}" class="part-full-time">{{ $jop->type }}</a>
-                                <p class="date-time">Created Since: {{ $jop->created_at->diffForHumans() }}</p>
                             </div>
                         </div>
                     </div>
@@ -143,7 +150,7 @@
                             <a href="{{ route('company', $company->slug) }}" class="Featuread-Company-item">
                                 <div class="media text-align-center  media1">
                                     <img src="{{ asset('files/company/' . $company->logo) }}"
-                                        style="width: 90%;height: 90%;" alt="{{ $company->name }}"
+                                        style="width: 90%;height: 50%;" alt="{{ $company->name }}"
                                         class=" Featuread-Company-img margin-auto">
                                     <div class="media-body text-left text-align-center ">
                                         <h6>{{ $company->name }}</h6>
