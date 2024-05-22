@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Jop;
+use App\Models\Jopform;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -19,25 +21,29 @@ class HomeController extends Controller
     }
     public function jop($slug)
     {
-        $categories = Category::all();
-        $companies = company::all();
+
 
         $jop = Jop::where('slug', $slug)->first();
-        return view('Front.jop', compact('jop', 'companies', 'categories'));
+        return view('Front.jop', compact('jop'));
+    }
+    public function alljopz()
+    {
+        $jops = Jop::paginate(5);
+        return view('Front.Alljops', [
+            'jops' => $jops
+        ]);
     }
     public function company($slug)
     {
         $company = Company::where('slug', $slug)->first();
-        $categories = Category::all();
-        $companies = company::all();
-        return view('Front.company', compact('company', 'categories', 'companies'));
+
+        return view('Front.company', compact('company'));
     }
     public function category($slug)
     {
         $category = Category::where('slug', $slug)->first();
-        $categories = Category::all();
-        $companies = Company::all();
-        return view('Front.allcategory', compact('category', 'categories', 'companies'));
+
+        return view('Front.allcategory', compact('category'));
     }
 
     public function post_job()
@@ -70,22 +76,48 @@ class HomeController extends Controller
     }
     public function search(Request $request)
     {
-        $categories = Category::all();
-        $companies = Company::all();
+
         $category = $request->category_id;
         $company = $request->company_id;
         $name = $request->name;
         $query = Jop::query();
-        if ($name) {
+        if ($name !== null) {
             $query->where('name', 'like', '%' . $name . '%');
         }
-        if ($category) {
+        if ($category !== null) {
             $query->where('category_id', $category);
         }
-        if ($company) {
+        if ($company !== null) {
             $query->where('company_id', $company);
         }
         $jops = $query->paginate(5);
-        return view('Front.search', compact('jops', 'categories', 'companies'));
+        return view('Front.search', compact('jops'));
+    }
+
+    public function form_informations($slug)
+    {
+
+        $jop = Jop::where('slug', $slug)->first();
+        return view('Front.jop_form', compact('jop'));
+    }
+    public function send_form_informations(Request $request, $slug)
+    {
+
+        $jop = Jop::where('slug', $slug)->first();
+        if ($request->hasfile('user_cv')) {
+            $file = $request->file('user_cv');
+            $filename = time() . '.' . $file->getClientOriginalName();
+            $file->move(public_path('files/forms'), $filename);
+        }
+
+        Jopform::create([
+            'jop_id' => $jop->id,
+            'user_id' => Auth::user()->id,
+            'message' => $request->message,
+            'email' => Auth::user()->email,
+            'phone' => Auth::user()->phone,
+            'cv' => $filename,
+        ]);
+        return redirect()->route('home')->with('success', 'Form send Successfully');
     }
 }

@@ -38,6 +38,9 @@
                     <a href="{{ route('home') }}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{{ route('index_form_sended') }}" class="nav-link">Form sended </a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ route('jops.index') }}" class="nav-link">All Jops</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">

@@ -154,7 +154,10 @@
         </div>
     </section>
 
-
+    @php
+        $categories = App\Models\Category::all();
+        $companies = App\Models\company::all();
+    @endphp
     <div id="search-box">
         <div class="container search-box rounded">
             <form action="{{ route('search') }}" id="search-box_search_form_3"
@@ -163,14 +166,14 @@
                     <span class="large material-icons search">search</span>
                     <input class="search-box_search_input" placeholder="Search Keyword" type="text"
                         name="name">
-                    <select class="dropdown_item_select search-box_search_input" name="category">
-                        <option value="">Select Category</option>
+                    <select class="dropdown_item_select search-box_search_input" name="category_id">
+                        <option>Select Category</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select>
                     <select class="dropdown_item_select search-box_search_input" name="company_id">
-                        <option value="">Select Company</option>
+                        <option>Select Company</option>
                         @foreach ($companies as $company)
                             <option value="{{ $company->id }}">{{ $company->name }}</option>
                         @endforeach

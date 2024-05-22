@@ -70,7 +70,8 @@
 
     {{-- Recent Job Post --}}
     <section id="v2-resent-job-post">
-        <div class="vertical-space-85"></div>
+        <div class="vertical-space-85">
+        </div>
         <div class="container text-center">
             <h3 class="text-center">Recent Job Post</h3>
             <div class="vertical-space-30"></div>
@@ -97,8 +98,11 @@
                             @endif
 
                             <br> <span class="font-size font-bold">#{{ $jop->comments->count() }} Comments</span>
+                            <br> <span class="font-size font-bold">#{{ $jop->forms->count() }} Forms has send</span>
                             <br><span class="text font-size">Status : {{ $jop->status }} </span>
                             <p class="date-time">Created Since: {{ $jop->created_at->diffForHumans() }}</p>
+                            <p class="font-size font-bold">type : <a
+                                    href="{{ route('jop', $jop->slug) }}">{{ $jop->type }}</a></p> <br>
                             @php
                                 $tags = explode(',', $jop->tags);
                             @endphp
@@ -106,8 +110,10 @@
                                 <span class="badge bg-primary" style="color: white">{{ $tag }}</span>
                             @endforeach
                             <div class="float-right margin-top text-align-center">
-
-                                <a href="{{ route('jop', $jop->slug) }}" class="part-full-time">{{ $jop->type }}</a>
+                                @if (Auth::check() && Auth::user()->id !== $jop->user->id)
+                                    <a href="{{ route('form_informations', $jop->slug) }}" class="part-full-time">Send
+                                        Information</a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -115,9 +121,7 @@
             @endforeach
 
             <div class="job-list">
-                <ul class="pagination justify-content-end margin-auto">
-                    {{ $jops->links() }}
-                </ul>
+                <a href="{{ route('alljopz') }}" class="btn btn-outline-dark">All JopZ</a>
             </div>
         </div>
         <div class="vertical-space-60"></div>

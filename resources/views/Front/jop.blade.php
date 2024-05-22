@@ -24,7 +24,10 @@
         <div class="container background-color-full-white job-Details">
             <div class="Exclusive-Product">
                 <h3>{{ $jop->name }}</h3>
-                <a href="#" class="Apply-Now">Apply Now</a>
+                @if (Auth::user()->id !== $jop->user->id)
+                    <a href="{{ route('form_informations', $jop->slug) }}" class="Apply-Now">Send
+                        Information</a>
+                @endif
                 @if ($jop->company)
                     <h6 class="font-color-orange">Company : {{ $jop->company->name }}</h6>
                     <i class="material-icons">place</i>

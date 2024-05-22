@@ -56,7 +56,7 @@
             <div class="col">
                 <div class="card">
                     <img src="{{ asset('files/jops/' . $jop->image) }}" class="card-img-top" alt="..."
-                        style="height: 100%">
+                        style="height: 10%;width: 10%">
                     <div class="card-body">
                         <h5 class="card-title"><a href="{{ route('jops.show', $jop->slug) }}">{{ $jop->name }}</a></h5>
                         <p class="card-text">{{ $jop->description }}</p>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\CompanyController;
 use App\Http\Controllers\Dashboard\JopController;
+use App\Http\Controllers\Dashboard\JopformController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Front\CommentController;
 use App\Http\Controllers\Front\HomeController;
@@ -32,9 +33,18 @@ Route::group(
         Route::get('/company/{slug}', [HomeController::class, 'company'])->name('company');
         Route::get('/category/{slug}', [HomeController::class, 'category'])->name('category');
         Route::get('/jop/{slug}', [HomeController::class, 'jop'])->name('jop');
+        Route::get('/alljopz', [HomeController::class, 'alljopz'])->name('alljopz');
         Route::get('/search', [HomeController::class, 'search'])->name('search');
 
         Route::middleware('auth')->group(function () {
+            // form informations in front
+            Route::get('form/informations/{slug}', [HomeController::class, 'form_informations'])->name('form_informations');
+            Route::post('send/form/informations/{slug}', [HomeController::class, 'send_form_informations'])->name('send_form_informations');
+            // edit and delete form sended in dashboard
+            Route::get('form/sended', [JopformController::class, 'index_form_sended'])->name('index_form_sended');
+            Route::get('form/sended/edit/{id}/', [JopformController::class, 'edit_form_sended'])->name('edit_form_sended');
+            Route::post('form/sended/edit/{id}/', [JopformController::class, 'update_form_sended'])->name('update_form_sended');
+            Route::delete('form/sended/edit/{id}/', [JopController::class, 'destroy_form_sended'])->name('destroy_form_sended');
             //  Front page comment and delete it
             Route::post('/comment/{id}', [CommentController::class, 'store'])->name('comment.store');
             Route::delete('/comment/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');

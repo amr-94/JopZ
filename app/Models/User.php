@@ -81,4 +81,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Category::class);
     }
+
+    /**
+     * Get all of the forms for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function forms(): HasMany
+    {
+        return $this->hasMany(Jopform::class);
+    }
 }

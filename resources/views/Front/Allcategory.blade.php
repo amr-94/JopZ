@@ -49,6 +49,10 @@
                             <span class="text font-size"></span>
                             <div class="float-right margin-top text-align-center">
                                 <a href="{{ route('jop', $jop->slug) }}" class="part-full-time">{{ $jop->type }}</a>
+                                @if (Auth::user()->id !== $jop->user->id)
+                                    <a href="{{ route('form_informations', $jop->slug) }}" class="part-full-time">Send
+                                        Information</a>
+                                @endif
                                 <p class="date-time">Created Since: {{ $jop->created_at->diffForHumans() }}</p>
                                 <p class="text">status: {{ $jop->status }}</p>
                             </div>

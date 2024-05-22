@@ -60,6 +60,16 @@ class Jop extends Model
         return $this->hasMany(Comment::class);
     }
 
+    /**
+     * Get all of the forms for the Jop
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function forms(): HasMany
+    {
+        return $this->hasMany(Jopform::class);
+    }
+
     public static function booted()
     {
         static::creating(function ($jop) {
