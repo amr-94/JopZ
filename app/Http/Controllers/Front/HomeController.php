@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\Jop;
 use App\Models\Jopform;
+use App\Models\User;
+use App\Notifications\ApplyjopNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -104,13 +106,14 @@ class HomeController extends Controller
     {
 
         $jop = Jop::where('slug', $slug)->first();
+        $jopuser = User::where('id', $jop->user->id)->first();
         if ($request->hasfile('user_cv')) {
             $file = $request->file('user_cv');
             $filename = time() . '.' . $file->getClientOriginalName();
             $file->move(public_path('files/forms'), $filename);
         }
 
-        Jopform::create([
+        $applyjop = Jopform::create([
             'jop_id' => $jop->id,
             'user_id' => Auth::user()->id,
             'message' => $request->message,
@@ -118,6 +121,9 @@ class HomeController extends Controller
             'phone' => Auth::user()->phone,
             'cv' => $filename,
         ]);
+
+        $jopuser->notify(new ApplyjopNotification($applyjop));
+
         return redirect()->route('home')->with('success', 'Form send Successfully');
     }
 }

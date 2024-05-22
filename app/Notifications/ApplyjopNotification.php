@@ -6,21 +6,18 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Auth;
 
-class CommentNotification extends Notification
+class ApplyjopNotification extends Notification
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    protected $jop;
-    protected $comment;
-    public function __construct($jop, $comment)
+    protected $applyjop;
+    public function __construct($applyjop)
     {
-        $this->jop = $jop;
-        $this->comment = $comment;
+        $this->applyjop = $applyjop;
     }
 
     /**
@@ -52,12 +49,16 @@ class CommentNotification extends Notification
     public function toDatabase(object $notifiable): array
     {
         return [
-            'title' => 'new comment in your jop (' . $this->jop->name . ')',
-            'sender' => Auth::user()->name,
-            'data' => $this->comment,
-            'url' => route('jop', $this->jop->slug)
+            'title' => 'new Applay to your jop (' . $this->applyjop->jop->name . ')',
+            'Apply_by' => $this->applyjop->user->name,
+            'jop_id' => $this->applyjop->jop->id,
+            'jop_name' => $this->applyjop->jop->name,
+            'data' => $this->applyjop,
+            'url' => route('jops.show', $this->applyjop->jop->slug)
+
         ];
     }
+
     public function toArray(object $notifiable): array
     {
         return [
