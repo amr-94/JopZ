@@ -92,6 +92,10 @@ class HomeController extends Controller
         if ($company !== null) {
             $query->orwhere('company_id', $company);
         }
+        // if ($category !== null && $company !== null) {
+        //     $query->orwhere('category_id', $category)
+        //         ->orwhere('company_id', $company);
+        // }
         $jops = $query->latest()->paginate(5);
         return view('Front.search', compact('jops'));
     }
