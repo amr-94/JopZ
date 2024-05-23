@@ -118,7 +118,8 @@ return [
     'Companies' => 'Companies',
     'Form sended' => 'Form sended from you',
     'Notifications' => 'Notifications',
-    'See All Notifications' => 'See All Notifications'
+    'See All Notifications' => 'See All Notifications',
+    'edit page' => 'edit page'
 
 
 

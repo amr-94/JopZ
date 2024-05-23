@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+@if (config('app.locale') == 'en')
+    <html lang="en" dir="lte">
+@else
+    <html lang="en" dir="rtl">
+@endif
 
 <head>
     <meta charset="utf-8">
@@ -15,6 +19,8 @@
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+
+
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -49,6 +55,16 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ route('companies.index') }}" class="nav-link">@lang('main.Companies')</a>
                 </li>
+                <ul>
+                    @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        <li>
+                            <a rel="alternate" hreflang="{{ $localeCode }}"
+                                href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                {{ $properties['native'] }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
             </ul>
 
             <!-- Right navbar links -->
@@ -124,27 +140,28 @@
                 <!-- Sidebar -->
                 <div class="sidebar">
                     <!-- Sidebar user panel (optional) -->
-                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="user-panel mt-3 pb-3 mb-3 d-flex mt-4">
                         <div class="image">
                             <img src="{{ asset('files/profile/images/' . Auth::user()->image) }}"
                                 class="img-circle elevation-2" alt="User Image">
-                        </div>
-                        <div class="info">
                             <a href="{{ route('users.show', Auth::user()->name) }}"
                                 class="d-block">{{ Auth::user()->name }}</a>
-                            <div class="d-flex justify-content-between mt-2">
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button class="btn btn-sm btn-outline-danger ">@lang('main.logout')</button>
-                                </form>
-                                <a href="{{ route('users.edit', Auth::user()->name) }}"
-                                    class="btn btn-outline-success btn-sm  mr-5">@lang('main.edit page')</a>
-                            </div>
+
                         </div>
 
+                        <div class="info">
+                            <div class="d-flex justify-content-around">
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-sm btn-outline-danger">@lang('main.logout')</button>
+                                </form>
+                                <a href="{{ route('users.edit', Auth::user()->name) }}"
+                                    class="btn btn-outline-success btn-sm ">@lang('main.edit page')</a>
+                            </div>
+                        </div>
                     </div>
-                @endauth
-            </div>
+                </div>
+            @endauth
 
             <!-- SidebarSearch Form -->
             <div class="form-inline">
