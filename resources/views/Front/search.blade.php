@@ -3,6 +3,7 @@
     <section id="job-Details">
         <div class="container background-color-full-white job-Details">
             @if ($jops->count() > 0)
+                {{-- {{ dd($jops) }} --}}
                 @foreach ($jops as $jop)
                     <div class="Exclusive-Product">
                         <h3><a href="{{ route('jop', $jop->slug) }}">{{ $jop->name }}</a></h3>
@@ -27,9 +28,8 @@
                     <p>@lang('main.No jops found')</p>
                 </div>
             @endif
+            {{ $jops->links() }}
 
         </div>
-
-
     </section>
 @endsection

@@ -173,7 +173,7 @@
 
     @php
         $categories = App\Models\Category::all();
-        $companies = App\Models\company::all();
+        $companies = App\Models\Company::all();
     @endphp
     <div id="search-box">
         <div class="container search-box rounded">

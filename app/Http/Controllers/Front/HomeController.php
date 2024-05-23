@@ -84,15 +84,15 @@ class HomeController extends Controller
         $name = $request->name;
         $query = Jop::query();
         if ($name !== null) {
-            $query->where('name', 'like', '%' . $name . '%');
+            $query->whereAny(['name', 'slug'], 'like', '%' . $name . '%');
         }
         if ($category !== null) {
-            $query->where('category_id', $category);
+            $query->orwhere('category_id', $category);
         }
         if ($company !== null) {
-            $query->where('company_id', $company);
+            $query->orwhere('company_id', $company);
         }
-        $jops = $query->paginate(5);
+        $jops = $query->latest()->paginate(5);
         return view('Front.search', compact('jops'));
     }
 

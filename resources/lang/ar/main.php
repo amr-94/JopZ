@@ -131,7 +131,8 @@ return [
     'Form sended' => 'جميع النماذج المرسلة منك',
     'Notifications' => 'جميع الاشعارات',
     'edit page' => 'صفحة التعديل',
-    'See All Notifications' => 'جميع الاشعارات'
+    'See All Notifications' => 'جميع الاشعارات',
+    'No jops found' => 'لا يوجد وظائف',
 
 
 
