@@ -6,9 +6,9 @@
             <div class="card">
                 <img src="{{ asset('files/categories/' . $Category->image) }}" class="card-img-top" alt="...">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Category Name / {{ $Category->name }}</h5>
-                    <p class="card-text">Category Description / {{ $Category->description }}</p>
-                    <p>Sub Category / {{ $Category->parent_id ?? 'No Sub Category' }}</p>
+                    <h5 class="card-title"> @lang('main.Category Name') / {{ $Category->name }} </h5>
+                    <p class="card-text">@lang('main.Category Description') / {{ $Category->description }}</p>
+                    <p>@lang('main.Sub Category') / {{ $Category->parent_id ?? 'No Sub Category' }}</p>
                     <p>Status / {{ $Category->status }}</p>
                     <p class="card-text">
 
@@ -17,11 +17,12 @@
                     <p class="card-text mb-5">{{ $Category->created_at->diffForHumans() }}</p>
                     @if (Auth::user()->id == $Category->user_id)
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('companies.edit', $Category->slug) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('companies.edit', $Category->slug) }}"
+                                class="btn btn-primary">@lang('main.Edit')</a>
                             <form action="{{ route('companies.destroy', $Category->slug) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger">@lang('main.Delete')</button>
                             </form>
                         </div>
                     @endif
@@ -42,22 +43,22 @@
                     <div class="card-body">
                         <h5 class="card-title"><a href="{{ route('jops.show', $jop->slug) }}">{{ $jop->name }}</a></h5>
                         <p class="card-text">{{ $jop->description }}</p>
-                        <p class="card-text"> Type : {{ $jop->type }}</p>
-                        <p class="card-text"> Status : {{ $jop->status }}</p>
+                        <p class="card-text"> @lang('main.Type') : {{ $jop->type }}</p>
+                        <p class="card-text"> @lang('main.Status') : {{ $jop->status }}</p>
                         @if ($jop->category)
                             <a href="{{ route('categories.show', $jop->category->slug) }}">{{ $jop->category->name }}</a>
                         @else
-                            No Category
+                            @lang('main.No Category')
                         @endif
                         </p>
-                        <p class="card-text"> Company :
+                        <p class="card-text"> @lang('main.Company') :
                             @if ($jop->company)
                                 <a href="{{ route('companies.show', $jop->company->slug) }}">{{ $jop->company->name }}</a>
                             @else
-                                No Company
+                                @lang('main.No Company')
                             @endif
                         </p>
-                        <p class="card-text"> uploded by : {{ $jop->user->name }}</p>
+                        <p class="card-text"> @lang('main.uploded by') : {{ $jop->user->name }}</p>
                         @php
                             $tags = explode(',', $jop->tags);
                         @endphp
@@ -69,11 +70,12 @@
                         <p class="card-text mb-5">{{ $jop->created_at->diffForHumans() }}</p>
                         @if (Auth::user()->id == $jop->user_id)
                             <div class="d-flex justify-content-between">
-                                <a href="{{ route('jops.edit', $jop->slug) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ route('jops.edit', $jop->slug) }}"
+                                    class="btn btn-primary">@lang('main.Edit')</a>
                                 <form action="{{ route('jops.destroy', $jop->slug) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger">@lang('main.Delete')</button>
                                 </form>
                             </div>
                         @endif

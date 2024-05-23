@@ -35,19 +35,19 @@
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('home') }}" class="nav-link">Home</a>
+                    <a href="{{ route('home') }}" class="nav-link">@lang('main.home')</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('index_form_sended') }}" class="nav-link">Form sended </a>
+                    <a href="{{ route('index_form_sended') }}" class="nav-link">@lang('main.Form sended')</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('jops.index') }}" class="nav-link">All Jops</a>
+                    <a href="{{ route('jops.index') }}" class="nav-link">@lang('main.All Jops')</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('categories.index') }}" class="nav-link">Categories</a>
+                    <a href="{{ route('categories.index') }}" class="nav-link">@lang('main.Categories')</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('companies.index') }}" class="nav-link">Companies</a>
+                    <a href="{{ route('companies.index') }}" class="nav-link">@lang('main.Companies')</a>
                 </li>
             </ul>
 
@@ -85,7 +85,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <span class="dropdown-item dropdown-header">{{ count(Auth::user()->unreadnotifications) }}
-                            Notifications</span>
+                            @lang('main.Notifications')</span>
                         @foreach (Auth::user()->unreadnotifications as $notification)
                             <div class="dropdown-divider"></div>
                             <a href="{{ route('notifications', $notification->id) }}" class="dropdown-item">
@@ -94,8 +94,8 @@
                                     class="float-right text-muted text-sm">{{ $notification->created_at->diffForHumans() }}</span>
                             </a>
                         @endforeach
-                        <a href="{{ route('All.notifications') }}" class="dropdown-item dropdown-footer">See All
-                            Notifications</a>
+                        <a href="{{ route('All.notifications') }}"
+                            class="dropdown-item dropdown-footer">@lang('main.See All Notifications')</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -115,10 +115,10 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
-                <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
+            <a href="" class="brand-link">
+                {{-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                    style="opacity: .8"> --}}
+                <p style="text-align: center">{{ config('app.name') }}</p>
             </a>
             @auth
                 <!-- Sidebar -->
@@ -135,10 +135,10 @@
                             <div class="d-flex justify-content-between mt-2">
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
-                                    <button class="btn btn-outline-danger ">logout</button>
+                                    <button class="btn btn-sm btn-outline-danger ">@lang('main.logout')</button>
                                 </form>
                                 <a href="{{ route('users.edit', Auth::user()->name) }}"
-                                    class="btn btn-outline-success ml-2 ">edit page</a>
+                                    class="btn btn-outline-success btn-sm  mr-5">@lang('main.edit page')</a>
                             </div>
                         </div>
 

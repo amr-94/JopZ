@@ -6,33 +6,33 @@
     <form action="{{ route('companies.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-            <label for="name">Name</label>
+            <label for="name">@lang('main.Name')</label>
             <input type="text" name="name" id="name" class="form-control">
         </div>
         <div class="form-group">
-            <label for="logo">Email</label>
+            <label for="logo">@lang('main.Email')</label>
             <input type="email" name="email" id="email" class="form-control">
         </div>
         <div class="form-group">
-            <label for="logo">Description</label>
+            <label for="logo">@lang('main.Description')</label>
             <textarea name="description" id="description" class="form-control"></textarea>
         </div>
         <div class="form-group">
-            <label for="logo">Website</label>
+            <label for="logo">@lang('main.Website')</label>
             <input type="text" name="website" id="website" class="form-control">
         </div>
         <div class="form-group">
-            <label for="logo">Phone</label>
+            <label for="logo">@lang('main.Phone')</label>
             <input type="text" name="phone" id="phone" class="form-control">
         </div>
         <div class="form-group">
-            <label for="logo">Address</label>
+            <label for="logo">@lang('main.Address')</label>
             <input type="text" name="address" id="address" class="form-control">
         </div>
         <div class="form-group">
-            <label for="logo">Logo</label>
+            <label for="logo">@lang('main.Logo')</label>
             <input type="file" name="c_logo" id="c_logo" class="form-control">
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">@lang('main.Create')</button>
     </form>
 @endsection

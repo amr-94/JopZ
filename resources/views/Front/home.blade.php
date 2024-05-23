@@ -2,7 +2,7 @@
 @section('content')
     <section id="top-Job-Category">
         <div class="container">
-            <h3 class="text-center">Choose Job Category</h3>
+            <h3 class="text-center">@lang('main.Choose Job Category')</h3>
             <div class="vertical-space-30"></div>
             <p class="max-width">Lorem ipsum tempus amet conubia adipiscing fermentum viverra gravida, mollis
                 suspendisse pretium dictumst inceptos mattis euismod
@@ -21,13 +21,13 @@
                             <h6 class="font-color-black">{{ $category->name }}</h6>
                             <a href="{{ route('category', $category->slug) }}" class="button job_post"
                                 data-hover="View Jobs" data-active="I'M ACTIVE"><span>{{ count($category->jops) }}
-                                    Job Posts </span></a>
+                                    @lang('main.Job Posts') </span></a>
                         </div>
                     </div>
                 @endforeach
             </div>
             <div class="vertical-space-40"></div>
-            <a href="" class="Brows-All-Category">Brows All Category</a>
+            <a href="" class="Brows-All-Category">@lang('main.Brows All Category')</a>
         </div>
         <div class="vertical-space-85"></div>
     </section>
@@ -73,7 +73,7 @@
         <div class="vertical-space-85">
         </div>
         <div class="container text-center">
-            <h3 class="text-center">Recent Job Post</h3>
+            <h3 class="text-center">@lang('main.Recent Job Post')</h3>
             <div class="vertical-space-30"></div>
             <p class="max-width">Lorem ipsum tempus amet conubia adipiscing fermentum viverra gravida, mollis
                 suspendisse pretium dictumst inceptos mattis euismod
@@ -94,14 +94,14 @@
                                         href="{{ route('company', $jop->company->slug) }}">{{ $jop->company->name }}</a></span>
                                 <br />
                             @else
-                                No Company
+                                @lang('main.No Company')
                             @endif
 
-                            <br> <span class="font-size font-bold">#{{ $jop->comments->count() }} Comments</span>
-                            <br> <span class="font-size font-bold">#{{ $jop->forms->count() }} Forms has send</span>
-                            <br><span class="text font-size">Status : {{ $jop->status }} </span>
-                            <p class="date-time">Created Since: {{ $jop->created_at->diffForHumans() }}</p>
-                            <p class="font-size font-bold">type : <a
+                            <br> <span class="font-size font-bold">#{{ $jop->comments->count() }} @lang('main.Comments')</span>
+                            <br> <span class="font-size font-bold">#{{ $jop->forms->count() }} @lang('main.Forms has send')</span>
+                            <br><span class="text font-size">@lang('main.Status') : {{ $jop->status }} </span>
+                            <p class="date-time">@lang('main.Created Since') : {{ $jop->created_at->diffForHumans() }}</p>
+                            <p class="font-size font-bold">@lang('main.type') : <a
                                     href="{{ route('jop', $jop->slug) }}">{{ $jop->type }}</a></p> <br>
                             @php
                                 $tags = explode(',', $jop->tags);
@@ -111,8 +111,8 @@
                             @endforeach
                             <div class="float-right margin-top text-align-center">
                                 @if (Auth::check() && Auth::user()->id !== $jop->user->id)
-                                    <a href="{{ route('form_informations', $jop->slug) }}" class="part-full-time">Send
-                                        Information</a>
+                                    <a href="{{ route('form_informations', $jop->slug) }}"
+                                        class="part-full-time">@lang('main.Send Information')</a>
                                 @endif
                             </div>
                         </div>
@@ -121,7 +121,7 @@
             @endforeach
 
             <div class="job-list">
-                <a href="{{ route('alljopz') }}" class="btn btn-outline-dark">All JopZ</a>
+                <a href="{{ route('alljopz') }}" class="btn btn-outline-dark">@lang('All JopZ') </a>
             </div>
         </div>
         <div class="vertical-space-60"></div>
@@ -131,7 +131,7 @@
     <section id="v2-Featuread-Company" class="background-color-white">
         <div class="vertical-space-85"></div>
         <div class="container text-center">
-            <h3 class="text-center">Featuread Company</h3>
+            <h3 class="text-center">@lang('main.Featuread Company')</h3>
             <div class="vertical-space-30"></div>
             <p class="max-width">Lorem ipsum tempus amet conubia adipiscing fermentum viverra gravida, mollis
                 suspendisse pretium dictumst inceptos mattis euismod
@@ -147,15 +147,15 @@
                                         class=" Featuread-Company-img margin-auto">
                                     <div class="media-body text-left text-align-center ">
                                         <h6>{{ $company->name }}</h6>
-                                        <i class="material-icons">account_balance</i>
+                                        <i class="material-icons"> account_balance</i>
                                         <span class="text">{{ $company->name }}</span>
                                         <br />
-                                        <i class=" material-icons">place</i>
+                                        <i class=" material-icons">@lang('main.place')</i>
                                         <span class="text font-size">{{ $company->address }}</span>
                                         <br />
                                         <i class=" material-icons">person</i>
                                         <span class="text font-size font-color-orange">{{ count($company->jops) }}
-                                            Jops</span>
+                                            @lang('main.Jops')</span>
                                     </div>
                                 </div>
                             </a>

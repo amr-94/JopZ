@@ -44,18 +44,34 @@
                             </div>
 
                             <nav class="main_nav_contaner ml-auto">
+
                                 <ul class="main_nav">
-                                    <li class="dropdown active ">
+                                    <li class="dropdown active">
                                         <a class="dropdown-toggle" data-toggle="dropdown"
                                             href="{{ route('home') }}">Home
                                             <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="{{ route('home') }}">Home variation </a></li>
+                                            <li><a href="{{ route('home') }}">@lang('main.home')</a></li>
                                         </ul>
                                     </li>
+                                    <li class="dropdown active"> @lang('main.lang')
+                                        <span class="caret"></span>
+                                        <ul class="dropdown-menu">
+                                            @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                <li>
+                                                    <a class="dropdown-toggle" rel="alternate"
+                                                        hreflang="{{ $localeCode }}"
+                                                        href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                        {{ $properties['native'] }}
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+
                                     @guest
-                                        <li><a href="{{ route('login') }}">login</a></li>
-                                        <li><a href="{{ route('register') }}">register</a></li>
+                                        <li><a href="{{ route('login') }}">@lang('main.login')</a></li>
+                                        <li><a href="{{ route('register') }}">@lang('main.register')</a></li>
                                     @endguest
                                     @auth
                                         <li class="dropdown active ">
@@ -66,13 +82,14 @@
                                                 {{ Auth::user()->name }}
                                                 <span class="caret"></span></a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="{{ route('users.edit', Auth::user()->name) }}">User Dashboard
+                                                <li><a href="{{ route('users.edit', Auth::user()->name) }}">
+                                                        @lang('main.User Dashboard')
                                                     </a></li>
                                                 <li>
                                                     <form action="{{ route('logout') }}" method="post">
                                                         @csrf
                                                         <button type="submit"
-                                                            class="btn btn-sm btn-outline-dark">logout</button>
+                                                            class="btn btn-sm btn-outline-dark">@lang('main.logout')</button>
                                                     </form>
                                                 </li>
                                             </ul>
@@ -81,7 +98,7 @@
                                 </ul>
                                 <div class=" Post-Jobs">
                                     <a href="{{ route('post_job') }}" class="">
-                                        Post Jobs
+                                        @lang('main.Post Jobs')
                                     </a>
                                 </div>
                                 <div class="hamburger menu_mm menu-vertical">
@@ -143,7 +160,7 @@
             </div>
             <div class="carousel-container">
                 <div class="carousel-content">
-                    <h2 class="font-color-white">Find Jobs Now more Easy Way</h2>
+                    <h2 class="font-color-white">@lang('main.Find Jobs Now more Easy Way')</h2>
                     <p class="font-color-white">Lorem ipsum tempus amet conubia adipiscing fermentum viverra gravida,
                         mollis suspendisse pretium dictumst inceptos mattis euismod lorem nulla, magna duis nostra
                         sodales luctus nulla praesent fermentum a elit mollis purus aenean curabitur eleifend </p>
@@ -163,23 +180,23 @@
             <form action="{{ route('search') }}" id="search-box_search_form_3"
                 class="search-box_search_form d-flex flex-lg-row flex-column align-items-center justify-content-between ">
                 <div class="d-flex flex-row align-items-center justify-content-start inline-block">
-                    <span class="large material-icons search">search</span>
-                    <input class="search-box_search_input" placeholder="Search Keyword" type="text"
+                    <span class="large material-icons search">@lang('main.search')</span>
+                    <input class="search-box_search_input" placeholder="@lang('main.Search Keyword')" type="text"
                         name="name">
                     <select class="dropdown_item_select search-box_search_input" name="category_id">
-                        <option>Select Category</option>
+                        <option>@lang('main.Select Category')</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select>
                     <select class="dropdown_item_select search-box_search_input" name="company_id">
-                        <option>Select Company</option>
+                        <option>@lang('main.Select Company')</option>
                         @foreach ($companies as $company)
                             <option value="{{ $company->id }}">{{ $company->name }}</option>
                         @endforeach
                     </select>
                 </div>
-                <button type="submit" class="search-box_search_button rounded">Search Jobs</button>
+                <button type="submit" class="search-box_search_button rounded">@lang('main.Search Jobs')</button>
             </form>
         </div>
     </div>

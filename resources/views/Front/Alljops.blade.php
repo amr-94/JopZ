@@ -3,7 +3,7 @@
     <section id="v2-resent-job-post">
         <div class="vertical-space-85"></div>
         <div class="container text-center">
-            <h3 class="text-center">Recent Job Post</h3>
+            <h3 class="text-center">@lang('main.Recent Job Post')</h3>
             <div class="vertical-space-30"></div>
             <p class="max-width">Lorem ipsum tempus amet conubia adipiscing fermentum viverra gravida, mollis
                 suspendisse pretium dictumst inceptos mattis euismod
@@ -24,13 +24,13 @@
                                         href="{{ route('company', $jop->company->slug) }}">{{ $jop->company->name }}</a></span>
                                 <br />
                             @else
-                                No Company
+                                @lang('main.No Company')
                             @endif
 
                             <br> <span class="font-size font-bold">#{{ $jop->comments->count() }} Comments</span>
                             <br> <span class="font-size font-bold">#{{ $jop->forms->count() }} Forms has send</span>
-                            <br><span class="text font-size">Status : {{ $jop->status }} </span>
-                            <p class="date-time">Created Since: {{ $jop->created_at->diffForHumans() }}</p>
+                            <br><span class="text font-size">@lang('main.Status') : {{ $jop->status }} </span>
+                            <p class="date-time">@lang('main.Created Since') : {{ $jop->created_at->diffForHumans() }}</p>
                             @php
                                 $tags = explode(',', $jop->tags);
                             @endphp
@@ -40,8 +40,8 @@
                             <div class="float-right margin-top text-align-center">
                                 <a href="{{ route('jop', $jop->slug) }}" class="part-full-time">{{ $jop->type }}</a>
                                 @if (Auth::user()->id !== $jop->user->id)
-                                    <a href="{{ route('form_informations', $jop->slug) }}" class="part-full-time">Send
-                                        Information</a>
+                                    <a href="{{ route('form_informations', $jop->slug) }}"
+                                        class="part-full-time">@lang('main.Send Information')</a>
                                 @endif
                             </div>
                         </div>

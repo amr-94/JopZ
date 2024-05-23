@@ -3,21 +3,22 @@
 @section('content')
     @component('components.alert_component')
     @endcomponent
-    <button class="btn btn-outline-dark mb-3"><a href="{{ route('categories.create') }}" style="color: rgb(170, 170, 170)">Add
-            Category</a></button>
-    <button class="btn btn-outline-dark mb-3"><a href=" " style="color: rgb(170, 170, 170)">Trash</a></button>
+    <button class="btn btn-outline-dark mb-3"><a href="{{ route('categories.create') }}" style="color: rgb(170, 170, 170)">
+            @lang('main.Add Category')</a></button>
+    <button class="btn btn-outline-dark mb-3"><a href=" "
+            style="color: rgb(170, 170, 170)">@lang('main.Trash')</a></button>
     <div class="container">
         <table class="table">
             <thead>
                 <tr>
-                    <th>image</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>parent_id</th>
-                    <th># of Jops</th>
-                    <th>Created_at</th>
-                    <th>Updated_at</th>
-                    <th>Actions</th>
+                    <th>@lang('main.image')</th>
+                    <th>@lang('main.Name')</th>
+                    <th>@lang('main.Description')</th>
+                    <th>@lang('main.Parent')</th>
+                    <th>@lang('main.# of Jops')</th>
+                    <th>@lang('main.Created at')</th>
+                    <th>@lang('main.Updated at')</th>
+                    <th>@lang('main.Actions')</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,7 +47,7 @@
                                 @if (Auth::user()->id == $category->user_id)
                                     <button type="submit" class="btn btn-outline-success btn-sm">
                                         <a href="{{ route('categories.edit', $category->slug) }}"
-                                            style="color: rgb(170, 170, 170)">Edit </a></button>
+                                            style="color: rgb(170, 170, 170)">@lang('main.Edit')</a></button>
                                 @endif
                             </td>
                             <td>
@@ -55,14 +56,15 @@
                                         class="delete-form">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="btn btn-outline-danger btn-sm">Delete </button>
+                                        <button type="submit"
+                                            class="btn btn-outline-danger btn-sm">@lang('main.Delete')</button>
                                     </form>
                                 @endif
                             </td>
                         </tr>
                     @endforeach
                 @else
-                    <p> no catrgory for you </p>
+                    <p>@lang('main.no catrgory for you')</p>
 
                 @endif
 

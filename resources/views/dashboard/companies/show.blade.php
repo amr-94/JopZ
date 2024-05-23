@@ -6,37 +6,34 @@
             <div class="card">
                 <img src="{{ asset('files/company/' . $company->logo) }}" class="card-img-top" alt="...">
                 <div class="card-body text-center">
-                    <h5 class="card-title">COMPANY NAME : {{ $company->name }}</h5>
+                    <h5 class="card-title">@lang('main.COMPANY NAME') : {{ $company->name }}</h5>
                     <p class="card-text">
-                    <p class="fw-bold" style="color: rgb(134, 132, 132);font-weight: bold;">COMPANY
-                        DESCRIPTION :
+                    <p class="fw-bold" style="color: rgb(134, 132, 132);font-weight: bold;">
+                        @lang('main.COMPANY DESCRIPTION') :
                     </p>{{ $company->description }}</p>
                     <p class="card-text">
-                    <p class="fw-bold" style="color: rgb(134, 132, 132);font-weight: bold;">COMPANY
-                        WEBSITE :
+                    <p class="fw-bold" style="color: rgb(134, 132, 132);font-weight: bold;">@lang('main.COMPANY WEBSITE') :
                     </p>{{ $company->website }}</p>
                     <p class="card-text">
-                    <p class="fw-bold" style="color: rgb(134, 132, 132);font-weight: bold;">COMPANY
-                        ADDRESS :
+                    <p class="fw-bold" style="color: rgb(134, 132, 132);font-weight: bold;">@lang('main.COMPANY ADDRESS') :
                     </p>{{ $company->address }}</p>
                     <p class="card-text">
-                    <p class="fw-bold" style="color: rgb(134, 132, 132);font-weight: bold;">COMPANY
-                        PHONE :
+                    <p class="fw-bold" style="color: rgb(134, 132, 132);font-weight: bold;">@lang('main.COMPANY PHONE') :
                     </p>{{ $company->phone }}</p>
                     <p class="card-text">
-                    <p class="fw-bold" style="color: rgb(134, 132, 132);font-weight: bold;">COMPANY
-                        EMAIL :
+                    <p class="fw-bold" style="color: rgb(134, 132, 132);font-weight: bold;">@lang('main.COMPANY EMAIL') :
                     </p>{{ $company->email }}</p>
                 </div>
                 <div class="card-footer">
                     <p class="card-text mb-5">{{ $company->created_at->diffForHumans() }}</p>
                     @if (Auth::user()->id == $company->user_id)
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('companies.edit', $company->slug) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('companies.edit', $company->slug) }}"
+                                class="btn btn-primary">@lang('main.Edit')</a>
                             <form action="{{ route('companies.destroy', $company->slug) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger">@lang('main.Delete')</button>
                             </form>
                         </div>
                     @endif
@@ -56,22 +53,22 @@
                     <div class="card-body">
                         <h5 class="card-title"><a href="{{ route('jops.show', $jop->slug) }}">{{ $jop->name }}</a></h5>
                         <p class="card-text">{{ $jop->description }}</p>
-                        <p class="card-text"> Type : {{ $jop->type }}</p>
-                        <p class="card-text"> Status : {{ $jop->status }}</p>
+                        <p class="card-text"> @lang('main.Type') : {{ $jop->type }}</p>
+                        <p class="card-text"> @lang('main.Status') : {{ $jop->status }}</p>
                         @if ($jop->category)
                             <a href="{{ route('categories.show', $jop->category->slug) }}">{{ $jop->category->name }}</a>
                         @else
-                            No Category
+                            @lang('main.No Category')
                         @endif
                         </p>
-                        <p class="card-text"> Company :
+                        <p class="card-text"> @lang('main.Company') :
                             @if ($jop->company)
                                 <a href="{{ route('companies.show', $jop->company->slug) }}">{{ $jop->company->name }}</a>
                             @else
-                                No Company
+                                @lang('main.No Company')
                             @endif
                         </p>
-                        <p class="card-text"> uploded by : {{ $jop->user->name }}</p>
+                        <p class="card-text"> @lang('main.uploded by') : {{ $jop->user->name }}</p>
                         @php
                             $tags = explode(',', $jop->tags);
                         @endphp
@@ -81,16 +78,17 @@
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-between">
-                            <p class="card-text mb-5">creted since : {{ $jop->created_at->diffForHumans() }}</p>
-                            <p class="card-text mb-5">last updated since :{{ $jop->updated_at->diffForHumans() }}</p>
+                            <p class="card-text mb-5">@lang('main.Created since') : {{ $jop->created_at->diffForHumans() }}</p>
+                            <p class="card-text mb-5">@lang('main.Updated at') :{{ $jop->updated_at->diffForHumans() }}</p>
                         </div>
                         @if (Auth::user()->id == $jop->user_id)
                             <div class="d-flex justify-content-between">
-                                <a href="{{ route('jops.edit', $jop->slug) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ route('jops.edit', $jop->slug) }}"
+                                    class="btn btn-primary">@lang('main.Edit')</a>
                                 <form action="{{ route('jops.destroy', $jop->slug) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger">@lang('main.Delete')</button>
                                 </form>
                             </div>
                         @endif

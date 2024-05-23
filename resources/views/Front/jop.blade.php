@@ -5,14 +5,15 @@
             <div class="carousel-background"><img src="{{ asset('imags/slider/slider1.jpg') }}" alt></div>
             <div class="carousel-container">
                 <div class="carousel-content">
-                    <h2 class="font-color-white">Job Result</h2>
+                    <h2 class="font-color-white">@lang('main.Job')</h2>
                     @if ($jop->category)
-                        <p class="font-color-white width-100"><a href="{{ route('home') }}" class="font-color-white">Home
-                                /</a><a href="{{ route('category', $jop->category->slug) }}" class="font-color-white">
+                        <p class="font-color-white width-100"><a href="{{ route('home') }}"
+                                class="font-color-white">@lang('main.Home')
+                                / </a><a href="{{ route('category', $jop->category->slug) }}" class="font-color-white">
                                 {{ $jop->category->name }} </a>/ {{ $jop->name }}
                         </p>
                     @else
-                        <p>no category for this jop</p>
+                        <p>@lang('main.no category for this jop')</p>
                     @endif
 
                 </div>
@@ -25,24 +26,23 @@
             <div class="Exclusive-Product">
                 <h3>{{ $jop->name }}</h3>
                 @if (Auth::user()->id !== $jop->user->id)
-                    <a href="{{ route('form_informations', $jop->slug) }}" class="Apply-Now">Send
-                        Information</a>
+                    <a href="{{ route('form_informations', $jop->slug) }}" class="Apply-Now">@lang('main.Send Information')</a>
                 @endif
                 @if ($jop->company)
-                    <h6 class="font-color-orange">Company : {{ $jop->company->name }}</h6>
+                    <h6 class="font-color-orange">@lang('main.Company') : {{ $jop->company->name }}</h6>
                     <i class="material-icons">place</i>
-                    <span class="text">Location : {{ $jop->company->address }}</span>
+                    <span class="text">@lang('main.Location') : {{ $jop->company->address }}</span>
                 @else
-                    <p>no company for this job</p>
+                    <p>@lang('main.no company for this job')</p>
                 @endif
-                <h6 class="font-color-orange">Type : {{ $jop->type }}</h6>
-                <h4>Short description</h4>
-                <p>Description : {{ $jop->description }}</p>
-                <p>Status : {{ $jop->status }}</p>
+                <h6 class="font-color-orange">@lang('main.Type') : {{ $jop->type }}</h6>
+                <h4>@lang('main.Short Description')</h4>
+                <p>@lang('main.Job Description') : {{ $jop->description }}</p>
+                <p>@lang('main.Status') : {{ $jop->status }}</p>
             </div>
             <img src="imags/job-detail.jpg" alt class="job-detail-img">
             <div class="Job-Description">
-                <h4>Job Description / Responsibility</h4>
+                <h4>@lang('main.Job Description')</h4>
                 <ul>
                     <li class="list-style">Et vestibulum ullamcorper curae
                         tellus consectetur erat pharetra et cubilia Nibh est
@@ -109,7 +109,7 @@
     <section id="comment" class="background-color-full-white-light">
         <div class="container">
             <div class="max-width-80">
-                <h4>Comments</h4>
+                <h4>@lang('main.Comments')</h4>
                 @if (count($jop->comments) > 0)
                     @foreach ($jop->comments as $comment)
                         <div class="media border p-3">
@@ -124,13 +124,13 @@
                                 <form action="{{ route('comment.destroy', $comment->id) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button class="btn btn-outline-danger">Delete</button>
+                                    <button class="btn btn-outline-danger">@lang('main.Delete')</button>
                                 </form>
                             @endif
                         </div>
                     @endforeach
                 @else
-                    <p>No comments Yet</p>
+                    <p>@lang('main.No comments Yet')</p>
                 @endif
                 <div class="media border p-3 padding-none border-none">
                     <img src="{{ asset('files/profile/images/' . $jop->user->image) }}" alt="John Doe"
@@ -148,9 +148,9 @@
                             <input type="file" name="file" id="comment_file" placeholder="Title" name="title">
 
                             @if (Auth::check())
-                                <button class="Post">Post</button>
+                                <button class="Post">@lang('main.Post')</button>
                             @else
-                                <a href="{{ login }}"> Login to Comment</a>
+                                <a href="{{ login }}">@lang('main.Login to Comment')</a>
                             @endif
 
                         </form>
