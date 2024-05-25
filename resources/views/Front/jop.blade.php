@@ -25,7 +25,7 @@
         <div class="container background-color-full-white job-Details">
             <div class="Exclusive-Product">
                 <h3>{{ $jop->name }}</h3>
-                @if (Auth::user()->id !== $jop->user->id)
+                @if (Auth::check() && Auth::user()->id !== $jop->user->id)
                     <a href="{{ route('form_informations', $jop->slug) }}" class="Apply-Now">@lang('main.Send Information')</a>
                 @endif
                 @if ($jop->company)
@@ -150,7 +150,7 @@
                             @if (Auth::check())
                                 <button class="Post">@lang('main.Post')</button>
                             @else
-                                <a href="{{ login }}">@lang('main.Login to Comment')</a>
+                                <a href="{{ route('login') }}">@lang('main.Login to Comment')</a>
                             @endif
 
                         </form>
