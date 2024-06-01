@@ -107,7 +107,8 @@
                                 $tags = explode(',', $jop->tags);
                             @endphp
                             @foreach ($tags as $tag)
-                                <span class="badge bg-primary" style="color: white">{{ $tag }}</span>
+                                <a href="{{ route('tag', $tag) }}" class="badge bg-primary"
+                                    style="color: white">{{ $tag }}</a>
                             @endforeach
                             <div class="float-right margin-top text-align-center">
                                 @if (Auth::check() && Auth::user()->id !== $jop->user->id)

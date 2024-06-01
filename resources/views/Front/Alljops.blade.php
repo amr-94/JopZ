@@ -31,15 +31,13 @@
                             <br> <span class="font-size font-bold">#{{ $jop->forms->count() }} Forms has send</span>
                             <br><span class="text font-size">@lang('main.Status') : {{ $jop->status }} </span>
                             <p class="date-time">@lang('main.Created Since') : {{ $jop->created_at->diffForHumans() }}</p>
-                            @php
-                                $tags = explode(',', $jop->tags);
-                            @endphp
                             @foreach ($tags as $tag)
-                                <span class="badge bg-primary" style="color: white">{{ $tag }}</span>
+                                <a href="{{ route('tag', $tag) }}" class="badge bg-primary"
+                                    style="color: white">{{ $tag }}</a>
                             @endforeach
                             <div class="float-right margin-top text-align-center">
                                 <a href="{{ route('jop', $jop->slug) }}" class="part-full-time">{{ $jop->type }}</a>
-                                @if (Auth::user()->id !== $jop->user->id)
+                                @if (Auth::check() && Auth::user()->id !== $jop->user->id)
                                     <a href="{{ route('form_informations', $jop->slug) }}"
                                         class="part-full-time">@lang('main.Send Information')</a>
                                 @endif

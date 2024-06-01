@@ -47,7 +47,7 @@
                             <p class="card-text mb-5">creted since : {{ $jop->created_at->diffForHumans() }}</p>
                             <p class="card-text mb-5">last updated since : {{ $jop->updated_at->diffForHumans() }}</p>
                         </div>
-                        @if (Auth::user() == $jop->user)
+                        @if (Auth::user()->id == $jop->user->id)
                             <div class="d-flex justify-content-between">
                                 <a href="{{ route('jops.edit', $jop->slug) }}" class="btn btn-primary">Edit</a>
                                 <form action="{{ route('jops.destroy', $jop->slug) }}" method="post">

@@ -39,6 +39,7 @@ Route::group(
         Route::get('/jop/{slug}', [HomeController::class, 'jop'])->name('jop');
         Route::get('/alljopz', [HomeController::class, 'alljopz'])->name('alljopz');
         Route::get('/search', [HomeController::class, 'search'])->name('search');
+        Route::get('/tag/{tag}', [HomeController::class, 'tag'])->name('tag');
 
         Route::middleware('auth')->group(function () {
             // form informations in front

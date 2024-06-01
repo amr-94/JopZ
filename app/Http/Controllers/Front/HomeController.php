@@ -130,4 +130,10 @@ class HomeController extends Controller
 
         return redirect()->route('home')->with('success', 'Form send Successfully');
     }
+
+    public function tag($tag)
+    {
+        $jops = Jop::where('tags', 'LIKE', "%{$tag}%")->paginate(5);
+        return view('Front.search', compact('jops'));
+    }
 }

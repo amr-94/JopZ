@@ -7,7 +7,7 @@
                 @foreach ($jops as $jop)
                     <div class="Exclusive-Product">
                         <h3><a href="{{ route('jop', $jop->slug) }}">{{ $jop->name }}</a></h3>
-                        <a href="{{ route('send_form_informations', $jop->slug) }}" class="Apply-Now">@lang('main.Apply Now')</a>
+                        <a href="{{ route('form_informations', $jop->slug) }}" class="Apply-Now">@lang('main.Apply Now')</a>
                         <h6 class="font-color-orange">@lang('main.Company') : {{ $jop->company->name ?? 'no company' }}</h6>
                         <p class="font-color-orange">
                             @lang('main.Category') : {{ $jop->category->name ?? 'no category' }}
@@ -22,6 +22,14 @@
                     </div>
                     <img src="{{ asset('files/jops/' . $jop->image) }}" alt class="img-circle"
                         style="width: 50%; height: 50%;">
+                    @php
+                        $tags = explode(',', $jop->tags);
+                    @endphp
+                    @foreach ($tags as $tag)
+                        <a href="{{ route('tag', $tag) }}" class="badge bg-primary"
+                            style="color: white">{{ $tag }}</a>
+                    @endforeach
+                    <hr width="100%" size="2" color="black" noshade>
                 @endforeach
             @else
                 <div class="Exclusive-Product">
